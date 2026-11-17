@@ -27,4 +27,4 @@ this was made as a small learning project in a single day, it doesn't aim or pla
 etc.
 
 ## license
-[unlicense](license)
+[unlicense](LICENSE)
