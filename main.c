@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include <errno.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -76,7 +77,7 @@ int parse_commands(size_t cmdc, char *cmd[])
     else if (strcmp(cmd[0], "cd") == 0)
     {
         if (cmd[1] == NULL)
-            //printf("cd: too little arguments (expected 1, got %zu) \n", cmdc - 1);
+            // printf("cd: too little arguments (expected 1, got %zu) \n", cmdc - 1);
             chdir(getenv("HOME"));
         else if (chdir(cmd[1]) != 0)
             perror("cd");
