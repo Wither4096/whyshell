@@ -9,7 +9,7 @@
 
 int parse_commands(size_t cmdc, char *cmd[]);
 
-int main(int argc, char *argv[])
+int main(void)
 {
     fputs("whyshell\n", stdout);
 
@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     for (;;)
     {
         fputs("whysh? ", stdout);
+        fflush(stdout);
 
         if (getline(&buf, &capacity, stdin) == -1)
             break;
@@ -69,8 +70,19 @@ int parse_commands(size_t cmdc, char *cmd[])
         if (cmdc == 1)
             return 1;
         else
-            printf("exit: too many arguments (expected 1, got %lu) \n", cmdc);
+            printf("exit: too many arguments (expected 0, got %zu) \n", cmdc - 1);
     }
+
+    else if (strcmp(cmd[0], "cd") == 0)
+    {
+        if (cmd[1] == NULL)
+            //printf("cd: too little arguments (expected 1, got %zu) \n", cmdc - 1);
+            chdir(getenv("HOME"));
+        else if (chdir(cmd[1]) != 0)
+            perror("cd");
+        return 0;
+    }
+
     else
     {
         int status;
