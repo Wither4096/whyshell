@@ -16,7 +16,7 @@ yshell provides a simple UNIX based POSIX based shell with minimal functionality
 
 ## compiling
 ```bash
-gcc -Wall -Wextra -std=c11 main.c -o yshell
+gcc -Wall -Wextra -Wpedantic -std=c11 -o yshell main.c
 ```
 
 ## scope

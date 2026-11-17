@@ -36,12 +36,12 @@ int main(void)
             tok = strtok(NULL, " \r\n\t");
         }
 
-        cmd[cmdc] = NULL;
+        cmd[cmdc] = NULL; // terminate with NULL for unified parsing
 
-        if (cmd[0] == NULL)
+        if (cmd[0] == NULL) // input is empty, do nothing
             continue;
 
-        if (tok != NULL)
+        if (tok != NULL) // too many arguments parsed, we don't parse, skip
         {
             fputs("Too many arguments!\n", stdout);
             continue;
@@ -76,10 +76,10 @@ int parse_commands(size_t cmdc, char *cmd[])
 
     else if (strcmp(cmd[0], "cd") == 0)
     {
-        if (cmd[1] == NULL)
+        if (cmd[1] == NULL) // default case, cd to HOME
             // printf("cd: too little arguments (expected 1, got %zu) \n", cmdc - 1);
             chdir(getenv("HOME"));
-        else if (chdir(cmd[1]) != 0)
+        else if (chdir(cmd[1]) != 0) // cd error, let cd output the error
             perror("cd");
         return 0;
     }
@@ -98,7 +98,7 @@ int parse_commands(size_t cmdc, char *cmd[])
         {
             if (execvp(cmd[0], cmd) == -1)
             {
-                // external call call error
+                // external call error
                 perror("call");
             }
             _exit(127);
